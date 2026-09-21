@@ -1,0 +1,404 @@
+/* ===== Custom current-location and parcel-search UI ===== */
+.custom-location-control {
+    position: relative !important;
+    float: none !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 0 6px 0 !important;
+    padding: 0 !important;
+}
+#top-right-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+}
+.custom-location-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-weight: bold;
+    cursor: pointer;
+    min-height: 34px;
+    padding: 5px 9px;
+    border: 1px solid #aaa;
+    background: #f8f8f8;
+    color: #333;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.custom-location-button:hover { background: rgba(248,248,248,.85); }
+.custom-location-button:disabled { opacity: .65; cursor: wait; }
+.location-marker-dot {
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #1976d2;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #1976d2;
+    box-sizing: border-box;
+}
+
+/* Always-visible parcel search panel, placed above Zoom controls. */
+#top-left-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+.chiban-search-panel {
+    width: min(230px, 30vw);
+    min-width: 190px;
+    max-width: 280px;
+    background: rgba(255,255,255,.96);
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-shadow: 0 2px 7px rgba(0,0,0,.22);
+    color: #222;
+    box-sizing: border-box;
+    margin: 0 0 6px 0;
+    overflow: hidden;
+    font-size: 13px;
+}
+.chiban-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 7px;
+    background: #f3f3f3;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+}
+.chiban-panel-header button {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 18px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.chiban-panel-body { padding: 7px; }
+.chiban-panel-body label {
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+}
+.chiban-panel-body select,
+.chiban-panel-body input[type="text"] {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    margin-top: 3px;
+    padding: 3px 5px;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background: #fff;
+    color: #222;
+}
+.chiban-readonly-value {
+    min-height: 30px;
+    margin-top: 3px;
+    padding: 6px 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #f3f3f3;
+    font-weight: normal;
+    word-break: break-all;
+}
+.chiban-setting-button,
+.chiban-full-button {
+    width: 100%;
+    min-height: 32px;
+    padding: 5px 8px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background: #f5f5f5;
+    color: #222;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+.chiban-setting-button { margin-bottom: 5px; }
+.chiban-full-button.primary {
+    background: #e7f0ff;
+    border-color: #2f6fab;
+}
+.chiban-search-count {
+    margin: 7px 0 4px;
+    padding: 5px;
+    background: #f2f2f2;
+    border-radius: 3px;
+    font-weight: bold;
+}
+#chiban-search-results { height: 125px; }
+
+/* Settings dialog */
+.chiban-modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 20000;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+}
+.chiban-modal {
+    width: min(620px, 96vw);
+    max-height: 90vh;
+    overflow: auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 35px rgba(0,0,0,.35);
+    color: #222;
+}
+.chiban-settings-modal-size { width: min(620px, 96vw); }
+.chiban-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: bold;
+}
+.chiban-modal-close {
+    border: 0;
+    background: transparent;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+}
+.chiban-modal-body { padding: 14px; }
+.chiban-modal-body label { display: block; margin: 8px 0; font-weight: bold; }
+.chiban-modal-body select,
+.chiban-modal-body input[type="text"],
+.chiban-modal-body input[type="number"] {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 34px;
+    margin-top: 4px;
+    padding: 5px 7px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background: #fff;
+    color: #222;
+}
+.chiban-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.chiban-actions button,
+.chiban-oazi-buttons button {
+    min-height: 34px;
+    padding: 5px 12px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background: #f5f5f5;
+    color: #222;
+    cursor: pointer;
+}
+.chiban-actions button.primary { background: #e7f0ff; border-color: #2f6fab; font-weight: bold; }
+.chiban-setting-title { margin-top: 15px; font-weight: bold; }
+.chiban-oazi-row { display: grid; grid-template-columns: 1fr 190px; gap: 10px; align-items: start; }
+#chiban-oazi-list { width: 100%; min-height: 180px; }
+.chiban-oazi-buttons { display: flex; flex-direction: column; gap: 7px; }
+.chiban-oazi-buttons input { width: 100%; box-sizing: border-box; min-height: 34px; padding: 5px 7px; border: 1px solid #aaa; border-radius: 4px; }
+.chiban-zoom-note { margin-top: 9px; color: #666; font-size: 12px; line-height: 1.5; }
+
+/* Guaranteed bottom-right Tokyo Metropolitan Government link. */
+.tokyo-sangyo-link {
+    position: fixed;
+    right: 8px;
+    bottom: 8px;
+    z-index: 15000;
+    padding: 3px 6px;
+    background: rgba(255,255,255,.9);
+    border-radius: 3px;
+    color: #0078A8;
+    text-decoration: none;
+    font-size: 12px;
+}
+.tokyo-sangyo-link:hover { text-decoration: underline; }
+
+@media (max-width: 650px) {
+    .chiban-search-panel { width: 38vw; min-width: 175px; }
+    .chiban-oazi-row { grid-template-columns: 1fr; }
+    .chiban-oazi-buttons { display: grid; grid-template-columns: 1fr 1fr; }
+    .chiban-oazi-buttons input { grid-column: 1 / -1; }
+}
+
+/* ===== Final UI refinements ===== */
+.custom-location-control {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    z-index: 21000 !important;
+}
+.custom-location-button {
+    min-height: 30px !important;
+    height: 30px !important;
+    padding: 3px 7px !important;
+    gap: 4px !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    border-radius: 3px !important;
+}
+.location-marker-dot {
+    width: 11px !important;
+    height: 11px !important;
+    border-width: 2px !important;
+}
+#top-right-container .layer-switcher {
+    margin-top: 34px !important;
+}
+
+.chiban-search-panel {
+    width: min(205px, 27vw) !important;
+    min-width: 175px !important;
+    max-width: 220px !important;
+    font-size: 12px !important;
+}
+.chiban-panel-header {
+    padding: 4px 6px !important;
+}
+.chiban-panel-header button {
+    width: 23px !important;
+    height: 23px !important;
+    font-size: 16px !important;
+}
+.chiban-panel-body {
+    padding: 6px !important;
+}
+.chiban-panel-body label {
+    margin: 4px 0 !important;
+}
+.chiban-fixed-label {
+    margin: 5px 0 !important;
+    line-height: 1.35;
+}
+.chiban-fixed-label b {
+    font-weight: 700;
+}
+.chiban-readonly-value {
+    min-height: 27px !important;
+    padding: 4px 5px !important;
+}
+.chiban-panel-body select,
+.chiban-panel-body input[type="text"] {
+    min-height: 27px !important;
+    padding: 2px 4px !important;
+}
+.chiban-setting-button,
+.chiban-full-button {
+    min-height: 28px !important;
+    padding: 4px 6px !important;
+    font-size: 12px !important;
+}
+.chiban-search-count {
+    margin: 5px 0 3px !important;
+    padding: 4px !important;
+}
+#chiban-search-results {
+    height: 105px !important;
+}
+
+/* Settings dialog slightly smaller too. */
+.chiban-modal {
+    font-size: 12px !important;
+}
+.chiban-modal-header {
+    padding: 8px 11px !important;
+    font-size: 14px !important;
+}
+.chiban-modal-body {
+    padding: 11px !important;
+}
+.chiban-modal-body select,
+.chiban-modal-body input[type="text"],
+.chiban-modal-body input[type="number"] {
+    min-height: 30px !important;
+    padding: 4px 6px !important;
+}
+.chiban-actions button,
+.chiban-oazi-buttons button {
+    min-height: 30px !important;
+    padding: 4px 9px !important;
+    font-size: 12px !important;
+}
+
+/* ===== v4 refinements ===== */
+.custom-location-control {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 21000 !important;
+}
+.custom-location-button {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    padding: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
+.location-marker-dot {
+    width: 15px !important;
+    height: 15px !important;
+    border-radius: 50% !important;
+    display: block !important;
+    background: #1976d2 !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 0 0 1px #1976d2 !important;
+}
+#top-right-container .layer-switcher { margin-top: 36px !important; }
+.chiban-marker-setting-title { margin-top: 12px; padding-top: 7px; border-top: 1px solid #ddd; font-weight: bold; }
+.chiban-inline-check { display:flex !important; align-items:center; gap:6px; font-weight:normal !important; }
+.chiban-inline-check input { width:auto !important; min-height:auto !important; margin:0 !important; }
+.chiban-modal-body label { margin: 6px 0 !important; }
+
+
+/* ===== v5: Layer button above "私は今ココ！", shared right edge ===== */
+#top-right-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+}
+#top-right-container .custom-location-control {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    float: none !important;
+    margin: 6px 0 0 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+}
+#top-right-container .custom-location-button {
+    margin: 0 !important;
+}
+#top-right-container .layer-switcher {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
