@@ -2,29 +2,20 @@ var size = 0;
 var placement = 'point';
 
 var style_TEXT_3 = function(feature, resolution){
-    var context = {
-        feature: feature,
-        variables: {}
-    };
-    
-    var labelText = ""; 
-    var value = feature.get("''");
-    var labelFont = "10.4px \'Open Sans\', sans-serif";
-    var labelFill = "#323232";
-    var bufferColor = "#fafa0d";
-    var bufferWidth = 3.0;
-    var textAlign = "left";
-    var offsetX = 0;
-    var offsetY = 0;
-    var placement = 'point';
-    if (feature.get("大字地番") !== null) {
-        labelText = String(feature.get("大字地番"));
-    }
-    
-    var style = [ new ol.style.Style({
-        text: createTextStyle(feature, resolution, labelText, labelFont,
-                              labelFill, placement, bufferColor, bufferWidth)
-    })];;
+    var display = window.mapDisplaySettings || {};
+    var fontSize = Number(display.textSize);
+    if (!isFinite(fontSize) || fontSize <= 0) fontSize = 10.4;
+    var fontFamily = display.textFont || "'Open Sans', sans-serif";
+    var labelFont = fontSize + 'px ' + fontFamily;
+    var labelFill = display.textColor || '#323232';
+    var bufferColor = display.bufferColor || '#fafa0d';
+    var bufferWidth = Number(display.bufferWidth);
+    if (!isFinite(bufferWidth) || bufferWidth < 0) bufferWidth = 3.0;
+    var labelText = '';
+    if (feature.get('大字地番') !== null) labelText = String(feature.get('大字地番'));
 
-    return style;
+    return [new ol.style.Style({
+        text: createTextStyle(feature, resolution, labelText, labelFont,
+                              labelFill, 'point', bufferColor, bufferWidth)
+    })];
 };

@@ -2,30 +2,18 @@ var size = 0;
 var placement = 'point';
 
 var style_LINE_2 = function(feature, resolution){
-    var context = {
-        feature: feature,
-        variables: {}
-    };
-    
-    var labelText = ""; 
-    var value = feature.get("");
-    var labelFont = "10px, sans-serif";
-    var labelFill = "#000000";
-    var bufferColor = "";
-    var bufferWidth = 0;
-    var textAlign = "left";
-    var offsetX = 0;
-    var offsetY = 0;
-    var placement = 'point';
-    if ("" !== null) {
-        labelText = String("");
-    }
-    var style = [ new ol.style.Style({
-        stroke: new ol.style.Stroke({color: 'rgba(53,121,177,1.0)', lineDash: null, lineCap: 'square', lineJoin: 'bevel', width: 0.76}),
-        text: createTextStyle(feature, resolution, labelText, labelFont,
-                              labelFill, placement, bufferColor,
-                              bufferWidth)
-    })];
+    var display = window.mapDisplaySettings || {};
+    var lineColor = display.lineColor || '#3579b1';
+    var lineWidth = Number(display.lineWidth);
+    if (!isFinite(lineWidth) || lineWidth <= 0) lineWidth = 0.76;
 
-    return style;
+    return [new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: lineColor,
+            lineDash: null,
+            lineCap: 'square',
+            lineJoin: 'bevel',
+            width: lineWidth
+        })
+    })];
 };

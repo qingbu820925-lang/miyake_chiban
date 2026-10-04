@@ -402,3 +402,83 @@
     margin-left: auto !important;
     margin-right: 0 !important;
 }
+
+
+/* LINE / TEXT display settings */
+.map-style-button { margin-left: 0; }
+.map-style-modal-size { width: min(520px, calc(100vw - 24px)); }
+.map-style-body fieldset { border: 1px solid #bbb; border-radius: 5px; margin: 0 0 12px; padding: 10px 12px; }
+.map-style-body legend { font-weight: bold; padding: 0 6px; }
+.map-style-body label { display: grid; grid-template-columns: 1fr 180px; gap: 10px; align-items: center; margin: 8px 0; }
+.map-style-body input, .map-style-body select { width: 100%; min-height: 32px; box-sizing: border-box; }
+.map-style-body input[type="color"] { padding: 2px; cursor: pointer; }
+@media (max-width: 520px) { .map-style-body label { grid-template-columns: 1fr; gap: 4px; } }
+
+
+/* Google Maps point selection button */
+#top-right-container .custom-location-control {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 5px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+#top-right-container .google-map-location-button {
+    min-height: 30px !important;
+    padding: 4px 8px !important;
+    margin: 0 !important;
+    border: 1px solid #888 !important;
+    border-radius: 3px !important;
+    background: #f8f8f8 !important;
+    color: #333 !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+}
+#top-right-container .google-map-location-button:hover {
+    background: #e8f0fe !important;
+}
+#top-right-container .google-map-location-button.active {
+    background: #1a73e8 !important;
+    color: #fff !important;
+    border-color: #1558b0 !important;
+}
+
+
+/* Google Maps red pin icon */
+#top-right-container .google-map-location-button {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    padding: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.google-pin-icon {
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 20px;
+    border-radius: 50% 50% 50% 0;
+    background: #e53935;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 0 1px #b71c1c;
+}
+.google-pin-icon::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    left: 5px;
+    top: 5px;
+    border-radius: 50%;
+    background: #ffffff;
+}
+#top-right-container .google-map-location-button.active .google-pin-icon {
+    background: #ff1744;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #b71c1c;
+}
